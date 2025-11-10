@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Anonymizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2d3748;
+            width: 380px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            margin: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            height: 584px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a5568, #2d3748);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .help-toggle {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+
+        .language-toggle {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        .help-btn,
+        .globe-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .help-btn:hover,
+        .globe-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .header p {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .section {
+            padding: 14px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            flex-shrink: 0;
+        }
+
+        .manual-section {
+            border-left-color: #ed8936;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icon {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            align-items: stretch;
+        }
+
+        input[type="text"],
+        textarea {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: all 0.2s;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        textarea.full-width {
+            width: 100%;
+            flex: none;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary,
+        .btn-danger {
+            font-size: 11px;
+            padding: 8px 12px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            width: 100%;
+            padding: 10px;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .btn-action:hover {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+            transform: translateY(-1px);
+        }
+
+        .btn-manual {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+            color: white;
+            width: 100%;
+            padding: 8px;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .btn-manual:hover {
+            background: linear-gradient(135deg, #dd6b20, #c53030);
+            transform: translateY(-1px);
+        }
+
+        .pattern-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 80px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .pattern-list li {
+            padding: 6px 8px;
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+            border-bottom: 1px solid #f7fafc;
+        }
+
+        .pattern-list li:last-child {
+            border-bottom: none;
+        }
+
+        .pattern-list:empty:after {
+            content: "Keine Muster definiert";
+            display: block;
+            padding: 6px 8px;
+            color: #999;
+            font-style: italic;
+            font-size: 11px;
+        }
+
+        .mapping-display {
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.3;
+        }
+
+        .horizontal-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .left-content {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .right-content {
+            display: flex;
+        }
+
+        .deanon-section {
+            border-left-color: #48bb78;
+        }
+
+        .deanon-section textarea {
+            min-height: 60px;
+            resize: vertical;
+            max-height: 80px;
+        }
+
+        .manual-section textarea {
+            min-height: 60px;
+            resize: vertical;
+            max-height: 80px;
+        }
+
+        .output-area {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 10px;
+            white-space: pre-wrap;
+            min-height: 40px;
+            max-height: 60px;
+            overflow-y: auto;
+        }
+
+        .manual-output-area {
+            background: #fef5e7;
+            border: 1px solid #f6ad55;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 10px;
+            white-space: pre-wrap;
+            min-height: 40px;
+            max-height: 60px;
+            overflow-y: auto;
+        }
+
+        .regex-help {
+            font-size: 10px;
+            margin: 0;
+        }
+
+        .regex-help a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .regex-help a:hover {
+            text-decoration: underline;
+        }
+
+        .button-left {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 6px;
+        }
+
+        /* Manual replacement section toggle */
+        .manual-content {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .manual-content.expanded {
+            display: block;
+        }
+
+        /* Help modal styles */
+        .help-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .help-content {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 350px;
+            max-height: 520px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .help-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .help-content h2 {
+            color: #4a5568;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .help-content h3 {
+            color: #667eea;
+            font-size: 14px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        .help-content p {
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .help-content ul {
+            font-size: 12px;
+            margin-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        /* Collapsible sections in help */
+        .help-section {
+            margin-bottom: 12px;
+        }
+
+        .help-section-header {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #4a5568;
+            font-size: 13px;
+        }
+
+        .help-section-header:hover {
+            background: #edf2f7;
+        }
+
+        .help-section-content {
+            display: none;
+            padding: 8px 0;
+        }
+
+        .help-section-content.expanded {
+            display: block;
+        }
+
+        .help-toggle-icon {
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .help-toggle-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .content::-webkit-scrollbar,
+        .pattern-list::-webkit-scrollbar,
+        .mapping-display::-webkit-scrollbar,
+        .output-area::-webkit-scrollbar,
+        .manual-output-area::-webkit-scrollbar,
+        .help-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .content::-webkit-scrollbar-track,
+        .pattern-list::-webkit-scrollbar-track,
+        .mapping-display::-webkit-scrollbar-track,
+        .output-area::-webkit-scrollbar-track,
+        .manual-output-area::-webkit-scrollbar-track,
+        .help-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .content::-webkit-scrollbar-thumb,
+        .pattern-list::-webkit-scrollbar-thumb,
+        .mapping-display::-webkit-scrollbar-thumb,
+        .output-area::-webkit-scrollbar-thumb,
+        .manual-output-area::-webkit-scrollbar-thumb,
+        .help-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="help-toggle">
+                <button id="helpToggle" class="help-btn" title="Help / Hilfe">?</button>
+            </div>
+            <div class="language-toggle">
+                <button id="languageToggle" class="globe-btn" title="Switch Language">
+                    🌐
+                </button>
+            </div>
+            <h1>🔒 Text Anonymizer</h1>
+            <p>Lokale Textersetzung mit Rückübersetzung</p>
+        </div>
+
+        <div class="content">
+            <button id="applyReplacement" class="btn btn-action">
+                🔄 Textersetzung anwenden
+            </button>
+            <button id="manualToggle" class="btn btn-manual">
+                📝 Manuelle Ersetzung
+            </button>
+
+            <div class="section manual-section">
+                <div class="manual-content" id="manualContent">
+                    <h3 id="sectionManual">
+                        <span class="icon">📝</span>
+                        Manuelle Textersetzung
+                    </h3>
+                    <textarea id="manualInput" class="full-width"
+                        placeholder="Text hier eingeben oder einfügen..."></textarea>
+                    <div class="button-left">
+                        <button id="manualBtn" class="btn btn-primary">Anonymisieren</button>
+                    </div>
+                    <div id="manualOutput" class="manual-output-area"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 id="sectionPatterns">
+                    <span class="icon">🎯</span>
+                    Muster konfigurieren
+                </h3>
+                <div class="input-group">
+                    <input type="text" id="patternInput" placeholder="RegEx Muster eingeben (z.B. PMCID[0-9A-Z]+)">
+                    <button id="addPattern" class="btn btn-primary">+</button>
+                </div>
+                <ul id="patternList" class="pattern-list">
+                    <!-- Patterns will be populated here -->
+                </ul>
+                <div class="horizontal-layout">
+                    <div class="left-content">
+                        <div class="regex-help">
+                            📚 <a href="https://regex101.com" target="_blank" id="regexHelpLink">Regex Hilfe &
+                                Tester</a>
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <button id="clearPatterns" class="btn btn-danger">Löschen</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 id="sectionMapping">
+                    <span class="icon">🗂️</span>
+                    Zuordnung
+                </h3>
+                <div id="mapping" class="mapping-display">
+                    Noch keine Ersetzungen vorgenommen
+                </div>
+                <div class="horizontal-layout">
+                    <div class="left-content">
+                        <button id="exportMapping" class="btn btn-secondary">
+                            📤 Export
+                        </button>
+                        <button id="importMapping" class="btn btn-secondary">
+                            📥 Import
+                        </button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;">
+                    </div>
+                    <div class="right-content">
+                        <button id="clearMapping" class="btn btn-danger">
+                            🗑️ Löschen
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section deanon-section">
+                <h3 id="sectionDeanon">
+                    <span class="icon">🔓</span>
+                    Text entschlüsseln
+                </h3>
+                <textarea id="deanonInput" class="full-width"
+                    placeholder="Anonymisierten Text hier einfügen..."></textarea>
+                <div class="button-left">
+                    <button id="deanonBtn" class="btn btn-primary">Entschlüsseln</button>
+                </div>
+                <div id="deanonOutput" class="output-area"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="help-modal">
+        <div class="help-content">
+            <button class="help-close" id="helpClose">×</button>
+            <div id="helpText">
+                <!-- Help content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

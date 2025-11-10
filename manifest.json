@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "Local Text Anonymizer",
+    "version": "1.4",
+    "description": "Replaces sensitive patterns with placeholders and enables back-translation. Perfect for anonymizing IDs, codes, and identifiers on web pages while keeping all data locally.",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Text Anonymizer - Anonymize sensitive data locally"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}
