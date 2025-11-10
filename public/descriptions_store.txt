@@ -1,0 +1,61 @@
+# Chrome Web Store Information
+
+All information required to publish the extension on the webstore
+
+## Store-Eintrag
+### Beschreibung
+
+Anonymize IDs and sensitive text locally in your browser — customizable regex patterns, exportable mappings, no server uploads.
+
+
+Local Text Anonymizer safely anonymizes identifiable text (IDs like patient IDs/numbers, or other patterns) directly in your browser. The extension runs entirely locally — nothing is sent to any server. Use customizable regular-expression patterns to detect text in inputs and textareas; matches are replaced with stable pseudonyms so you can share or store text without exposing original identifiers. Mappings (original → replacement) are stored locally in your browser and can be exported, imported, or reversed (de-anonymized) from the popup.
+
+
+Key features
+
+Local-only processing — no network calls, privacy-preserving.
+Custom regex patterns: add or remove patterns to fit your data.
+Live replacement in text inputs and textareas as you type or paste.
+Manual anonymization and de-anonymization tools in the popup.
+Export and import JSON mappings for reproducible anonymization across sessions.
+Minimal, developer-oriented prototype for testing and integration.
+How to use
+
+Open the popup, add or accept the default pattern (e.g., ID[0-9A-Z]+).
+Click "Apply" to anonymize text in inputs/textareas or use the manual anonymize tool.
+Export the mapping to save replacement pairs; re-import to restore the same anonymization.
+Use de-anonymize to reverse replacements when needed.
+Use cases
+
+Preparing example data for testing or demonstration.
+Sharing de-identified snippets for collaboration or bug reports.
+Quick localization of sensitive identifiers before public display.
+Privacy
+
+All processing and mapping storage happen in chrome.storage.local on your machine. No data leaves your browser.
+
+## Datenschutz
+
+### Alleiniger Zweck
+
+ This extension anonymizes identifiable text patterns (for example PMCID or other identifiers) directly in your browser by replacing detected matches in input fields and textareas with stable pseudonymous placeholders. It stores mappings (original → placeholder) locally so de‑anonymization is possible in the popup. No data is sent to external servers.
+
+
+## Gründe für die Berechtigung
+
+### Begründung für storage
+
+Required to persist user-configured regex patterns and anonymization mappings (original → placeholder) locally in the browser. All data remains on the user's device; nothing is transmitted to external servers. This enables consistent replacements across sessions and allows users to de-anonymize text later.
+
+
+### Begründung für activeTab
+
+Required to access the currently active tab when the user explicitly clicks the extension icon and triggers anonymization. This permission ensures the extension only acts on the page the user is viewing and only after explicit user action. No background access to tabs occurs.
+
+### Begründung für scripting
+
+Required to inject the content script into the active tab on-demand when the user clicks "Apply Replacement." Without this permission, the extension cannot perform text replacement within page input fields and textareas. The script is only injected after user action, not automatically.
+
+## remote code
+
+No
