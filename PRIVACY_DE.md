@@ -84,7 +84,7 @@ Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Änderun
 Wenn Sie Fragen zu dieser Datenschutzerklärung oder den Datenpraktiken der Erweiterung haben, wenden Sie sich bitte an:
 
 **Entwickler:** F. Oberhammer  
-**Repository:** [https://github.com/OberhammerF/anon_ext](https://github.com/OberhammerF/anon_ext)  
+**Repository:** [https://github.com/OberhammerF/local-text-anonymizer](https://github.com/OberhammerF/local-text-anonymizer)  
 **E-Mail:** [oberhammer.dev@gmail.com]
 
 ## Compliance

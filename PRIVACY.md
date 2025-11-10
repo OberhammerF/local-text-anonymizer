@@ -84,7 +84,7 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 If you have questions about this Privacy Policy or the Extension's data practices, please contact:
 
 **Developer:** F. Oberhammer  
-**Repository:** [https://github.com/OberhammerF/anon_ext](https://github.com/OberhammerF/anon_ext)  
+**Repository:** [https://github.com/OberhammerF/local-text-anonymizer](https://github.com/OberhammerF/local-text-anonymizer)  
 **Email:** [oberhammer.dev@gmail.com]
 
 ## Compliance
