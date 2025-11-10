@@ -13,5 +13,6 @@ Notes:
 - The extension replaces matches in text inputs and textareas as you type or paste.
 - Mapping (original -> fake) is stored in chrome.storage.local. Use the popup to export or deanonymize text.
 - This is a minimal prototype intended for development and testing only.
+ - Note: The automatic "Apply Replacement" script was primarily tested on ChatGPT. Automatic replacement may not work on all websites (especially complex web apps or rich-text editors). In those cases, use the popup's "Manual Replacement" feature to anonymize text.
 
 © 2025 F. Oberhammer

@@ -7,6 +7,8 @@
 
 Local Text Anonymizer ("the Extension") is committed to protecting your privacy. This privacy policy explains what data is collected, how it is used, and how it is stored.
 
+**Note on functionality:** The Extension's automatic "Apply Replacement" feature (script injection) was primarily tested on ChatGPT. Automatic replacement may not work reliably on all websites (especially complex web apps or rich-text editors). In such cases, please use the Manual Replacement field in the popup to anonymize text.
+
 ## Data Collection and Storage
 
 The Extension collects and stores the following data **locally on your device only**:

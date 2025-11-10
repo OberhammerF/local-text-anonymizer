@@ -151,7 +151,7 @@ function updateHelpContent(lang) {
             
             <h3>Schnellstart</h3>
             <p>1. Muster hinzufügen (z.B. <code>PMCID[0-9A-Z]+</code>)<br>
-            2. "🔄 Textersetzung anwenden" für Webseiten<br>
+            2. "🔄 Textersetzung anwenden" für Webseiten (Hinweis: Die automatische Ersetzung wurde hauptsächlich mit ChatGPT getestet; auf anderen Websites kann sie fehlschlagen) <br>
             3. "📝 Manuelle Ersetzung" für schwierige Seiten</p>
             
             <div class="help-section">
@@ -177,8 +177,8 @@ function updateHelpContent(lang) {
                     <span class="help-toggle-icon">▶</span>
                 </div>
                 <div class="help-section-content">
-                    <p><strong>Automatisch:</strong> Funktioniert auf den meisten Websites</p>
-                    <p><strong>Manuell:</strong> Perfekt für moderne Apps wie Perplexity, ChatGPT, Google Docs</p>
+                    <p><strong>Automatisch:</strong> Funktioniert auf vielen Websites, wurde jedoch hauptsächlich mit ChatGPT getestet. Auf manchen Seiten kann die automatische Ersetzung fehlschlagen.</p>
+                    <p><strong>Manuell:</strong> Verwenden Sie die Manuelle Ersetzung für Seiten, bei denen die automatische Methode nicht funktioniert (z. B. komplexe Web-Apps oder rich-text-Editoren).</p>
                     <ul>
                         <li>Text in das Feld eingeben/einfügen</li>
                         <li>"Anonymisieren" klicken</li>
@@ -236,7 +236,7 @@ function updateHelpContent(lang) {
             
             <h3>Quick Start</h3>
             <p>1. Add patterns (e.g. <code>PMCID[0-9A-Z]+</code>)<br>
-            2. "🔄 Apply Replacement" for websites<br>
+            2. "🔄 Apply Replacement" for websites (note: automatic replacement was primarily tested on ChatGPT; it may not work on all sites)<br>
             3. "📝 Manual Replacement" for difficult sites</p>
             
             <div class="help-section">
@@ -262,8 +262,8 @@ function updateHelpContent(lang) {
                     <span class="help-toggle-icon">▶</span>
                 </div>
                 <div class="help-section-content">
-                    <p><strong>Automatic:</strong> Works on most websites</p>
-                    <p><strong>Manual:</strong> Perfect for modern apps like Perplexity, ChatGPT, Google Docs</p>
+                    <p><strong>Automatic:</strong> Works on many websites but was primarily tested on ChatGPT. Automatic replacement may fail on some sites.</p>
+                    <p><strong>Manual:</strong> Use Manual Replacement for sites where the automatic method doesn't work (for example complex web apps or rich-text editors).</p>
                     <ul>
                         <li>Enter/paste text into the field</li>
                         <li>Click "Anonymize"</li>

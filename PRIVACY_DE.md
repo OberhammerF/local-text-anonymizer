@@ -7,6 +7,8 @@
 
 Local Text Anonymizer („die Erweiterung") ist dem Schutz Ihrer Privatsphäre verpflichtet. Diese Datenschutzerklärung erklärt, welche Daten erfasst werden, wie sie verwendet und wie sie gespeichert werden.
 
+**Hinweis zur Funktionalität:** Die automatische Funktion "🔄 Textersetzung anwenden" (Skriptinjektion) wurde hauptsächlich mit ChatGPT getestet. Die automatische Ersetzung funktioniert unter Umständen nicht zuverlässig auf allen Websites (insbesondere komplexe Web-Apps oder Rich-Text-Editoren). In solchen Fällen verwenden Sie bitte das Feld für die "Manuelle Ersetzung" im Popup, um Text zu anonymisieren.
+
 ## Datenerfassung und Speicherung
 
 Die Erweiterung erfasst und speichert die folgenden Daten **ausschließlich lokal auf Ihrem Gerät**:
