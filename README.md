@@ -1,4 +1,4 @@
-# Local Text Anonymizer - Prototype
+# Local Text Anonymizer
 
 Instructions:
 1) Download the zip and unzip it.
