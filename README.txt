@@ -1,4 +1,4 @@
-Local Text Anonymizer - Prototype
+# Local Text Anonymizer - Prototype
 
 Instructions:
 1) Download the zip and unzip it.
@@ -13,3 +13,5 @@ Notes:
 - The extension replaces matches in text inputs and textareas as you type or paste.
 - Mapping (original -> fake) is stored in chrome.storage.local. Use the popup to export or deanonymize text.
 - This is a minimal prototype intended for development and testing only.
+
+© 2025 F. Oberhammer
