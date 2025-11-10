@@ -55,17 +55,6 @@ Note: manual loading is intended for development and testing only.
 - The extension requests only the permissions it needs: `storage`, `activeTab`, and `scripting` (used to inject the replacer script when you trigger it on the active tab).
 - See `PRIVACY.md` and `PRIVACY_DE.md` for full details.
 
-## For developers
-
-- `manifest.json` uses Manifest V3.
-- `content.js` is the content script that performs replacements. It attempts to handle inputs, textareas, contenteditable regions and some popular rich-text editor selectors.
-- To test locally: load unpacked (see Developer / manual install) and open DevTools to inspect console output.
-
-## Packaging & publishing
-
-- Before publishing to the Chrome Web Store: add icons (16, 48, 128 sizes), update `manifest.json` with an explicit `icons` object and bump the `version` field.
-- Prepare store assets: screenshots, short/long descriptions, privacy policy URL (see `PRIVACY.md`).
-
 ## License & contact
 
 © 2025 F. Oberhammer — see LICENSE (if present) or contact `oberhammer.dev@gmail.com` for questions.
