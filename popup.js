@@ -50,11 +50,12 @@ function renderMapping(mapObj) {
     }
 }
 
-let currentLanguage = 'de'; // default German
+let currentLanguage = 'en'; // default English
 
 function updateLanguage(lang) {
     const translations = {
         'de': {
+            applyNote: 'Hinweis: Die automatische Ersetzung wurde hauptsächlich mit ChatGPT getestet. Wenn sie auf einer Seite fehlschlägt, verwenden Sie bitte die Manuelle Ersetzung unten.',
             title: '🔒 Text Anonymizer',
             subtitle: 'Lokale Textersetzung mit Rückübersetzung',
             addPattern: '+',
@@ -78,6 +79,7 @@ function updateLanguage(lang) {
             noMappings: 'Noch keine Ersetzungen vorgenommen'
         },
         'en': {
+            applyNote: 'Note: Automatic replacement was primarily tested on ChatGPT; if it fails on a site, use Manual Replacement below.',
             title: '🔒 Text Anonymizer',
             subtitle: 'Local Text Replacement with Back-translation',
             addPattern: '+',
@@ -125,6 +127,10 @@ function updateLanguage(lang) {
     document.getElementById('sectionDeanon').innerHTML = `<span class="icon">🔓</span>${t.sectionDeanon}`;
     document.getElementById('sectionManual').innerHTML = `<span class="icon">📝</span>${t.sectionManual}`;
     document.getElementById('regexHelpLink').textContent = t.regexHelp;
+
+    // Update small inline note under Apply Replacement button
+    const applyNoteEl = document.getElementById('applyNote');
+    if (applyNoteEl) applyNoteEl.textContent = t.applyNote || '';
 
     // Update CSS content for empty pattern list
     const style = document.querySelector('style');
@@ -345,7 +351,7 @@ function loadAll() {
     chrome.storage.local.get(["patterns", "replacements", "language"], (data) => {
         const patterns = data.patterns || ["PMCID[0-9A-Z]+"];
         const replacements = data.replacements || {};
-        currentLanguage = data.language || 'de';
+        currentLanguage = data.language || 'en';
         renderPatterns(patterns);
         renderMapping(replacements);
         updateLanguage(currentLanguage);

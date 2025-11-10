@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -206,7 +206,7 @@
             width: 100%;
             padding: 10px;
             font-size: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 0px; /* reduced so helper note sits closer */
         }
 
         .btn-action:hover {
@@ -302,6 +302,13 @@
         }
 
         .manual-section textarea {
+            min-height: 60px;
+            resize: vertical;
+            max-height: 80px;
+        }
+
+        /* Keep manual textarea sizing when placed inside replacement-section */
+        .replacement-section textarea {
             min-height: 60px;
             resize: vertical;
             max-height: 80px;
@@ -429,6 +436,16 @@
             color: #2d3748;
         }
 
+        /* Small inline note under Apply Replacement */
+        .small-note {
+            font-size: 11px;
+            color: #718096;
+            margin: 2px 0 6px 0; /* tighter spacing */
+            padding: 0 2px;
+            line-height: 1.2;
+            display: block;
+        }
+
         .help-content ul {
             font-size: 12px;
             margin-left: 16px;
@@ -522,14 +539,15 @@
         </div>
 
         <div class="content">
-            <button id="applyReplacement" class="btn btn-action">
-                🔄 Textersetzung anwenden
-            </button>
-            <button id="manualToggle" class="btn btn-manual">
-                📝 Manuelle Ersetzung
-            </button>
+            <div class="section replacement-section">
+                <button id="applyReplacement" class="btn btn-action">
+                    🔄 Textersetzung anwenden
+                </button>
+                <div id="applyNote" class="small-note">Note: Automatic replacement was primarily tested on ChatGPT; if it fails on a site, use Manual Replacement below.</div>
+                <button id="manualToggle" class="btn btn-manual">
+                    📝 Manuelle Ersetzung
+                </button>
 
-            <div class="section manual-section">
                 <div class="manual-content" id="manualContent">
                     <h3 id="sectionManual">
                         <span class="icon">📝</span>
